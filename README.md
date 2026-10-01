@@ -30,7 +30,7 @@ MIT-licensed; credit to the original authors above.
 
 ```
 index.html     the whole app (HTML, CSS and JS in one file, fonts from Google Fonts)
-favicon.svg    tab icon
+favicon.svg    tab icon source (inlined into index.html)
 vercel.json    clean URLs + basic security headers
 ```
 
@@ -45,14 +45,20 @@ Open `index.html` in a browser. That's it — no build step.
 3. Framework preset: **Other**. Leave build command and output directory empty.
 4. Deploy. Every push to `main` redeploys automatically.
 
-To serve it under your portfolio domain at `/text-effects`, add a rewrite in
-the portfolio project's `vercel.json`:
+It's served at **lethimcook.design/text-effects** through a rewrite in the
+project that owns that domain. In that project's `vercel.json`:
 
 ```json
-{ "rewrites": [
-  { "source": "/text-effects", "destination": "https://YOUR-PROJECT.vercel.app/" }
-] }
+{
+  "rewrites": [
+    { "source": "/text-effects", "destination": "https://text-effect-panel.vercel.app/" }
+  ]
+}
 ```
+
+(or, in a Next.js project, the same rule under `async rewrites()` in `next.config`).
+The page has no relative asset links (the favicon is inlined), so it works at
+any path.
 
 ## Editing
 
